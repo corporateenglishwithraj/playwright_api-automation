@@ -18,6 +18,8 @@ import { readFile } from 'fs/promises';
 
   const body = await res.json();
 
+ // log token and response for debugging 
+   
   console.log(
     `Status: ${res.status()}\n` +
     `Token: ${body.token}\n` +
