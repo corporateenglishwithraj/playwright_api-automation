@@ -1,0 +1,6 @@
+Status: 200
+Token: 087486f0a70ef10
+Response:
+{
+  "token": "087486f0a70ef10"
+}

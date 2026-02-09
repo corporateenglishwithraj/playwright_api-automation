@@ -1,0 +1,7 @@
+Status: 200
+Token: 5e9f591db578e8e
+Response:
+{
+  "token": "5e9f591db578e8e"
+}
+{"firstname":"Mihir","lastname":"Brown","totalprice":111,"depositpaid":true,"bookingdates":{"checkin":"2018-01-01","checkout":"2019-01-01"},"additionalneeds":"Breakfast"}

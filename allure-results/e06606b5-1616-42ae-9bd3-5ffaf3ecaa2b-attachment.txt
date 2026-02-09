@@ -1,0 +1,7 @@
+Status: 200
+Token: ee601ff6fc28f41
+Response:
+{
+  "token": "ee601ff6fc28f41"
+}
+{"firstname":"Mihir","lastname":"Brown","totalprice":111,"depositpaid":true,"bookingdates":{"checkin":"2018-01-01","checkout":"2019-01-01"},"additionalneeds":"Breakfast"}

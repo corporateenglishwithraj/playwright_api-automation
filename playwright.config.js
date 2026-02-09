@@ -26,11 +26,21 @@ export default defineConfig({
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
+  retries: 2 , 
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  
+  reporter: [ // 'html',
+
+    // added allure reporter to generate allure results for each test run 
+    
+  ["line"],
+    ["allure-playwright", {
+      resultsDir: "allure-results", // Optional: specify where to save results
+    }],] ,
+
+
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
@@ -38,12 +48,14 @@ export default defineConfig({
 
     
     // ✅ Headed mode: show the browser UI
-    headless: true,
+    headless: false,
 
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
         trace: 'on-first-retry',
   },
+
+  
 
   /* Configure projects for major browsers */
   projects: [
@@ -68,12 +80,12 @@ export default defineConfig({
     //   name: 'Mobile Chrome',
     //   use: { ...devices['Pixel 5'] },
     // },
-    // {
-    //   name: 'Mobile Safari',
-    //   use: { ...devices['iPhone 12'] },
-    // },
+     {
+       name: 'Mobile Safari',
+       use: { ...devices['iPhone 12'] },
+     },
      
-    /* Test against branded browsers. */
+    /* Test against branded browsers. 
     // {
     //   name: 'Microsoft Edge',
     //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
@@ -82,7 +94,7 @@ export default defineConfig({
     {
        name: 'Google Chrome',
        use: { ...devices['Desktop Chrome'], channel: 'chrome' },
-    },
+    }, */
   ],
 
   /* Run your local dev server before starting the tests */

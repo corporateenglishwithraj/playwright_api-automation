@@ -1,0 +1,6 @@
+Status: 200
+Token: a3d43e4f3e9d66c
+Response:
+{
+  "token": "a3d43e4f3e9d66c"
+}

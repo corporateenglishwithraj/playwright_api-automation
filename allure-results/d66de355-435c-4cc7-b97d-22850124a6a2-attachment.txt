@@ -1,0 +1,7 @@
+Status: 200
+Token: babcf4a72c0b8b2
+Response:
+{
+  "token": "babcf4a72c0b8b2"
+}
+Created
