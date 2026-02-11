@@ -1,0 +1,6 @@
+Using token: its invalid token for testing purposes
+Response body: {
+  message: 'Bad credentials',
+  documentation_url: 'https://docs.github.com/rest',
+  status: '401'
+}

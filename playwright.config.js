@@ -1,107 +1,42 @@
 // @ts-check
 import { defineConfig, devices } from '@playwright/test';
+import dotenv from 'dotenv';
+import path from 'path';
 
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-// import dotenv from 'dotenv';
-// import path from 'path';
-// dotenv.config({ path: path.resolve(__dirname, '.env') });
+// Load .env from project root (same folder as this config)
+dotenv.config({ path: path.resolve(__dirname, '.env') });
 
-/**
- * @see https://playwright.dev/docs/test-configuration
- */
 export default defineConfig({
+  // Max time per test
+  timeout: 100 * 1000,
 
+  // Use a folder without spaces
 
-  
-// ✅ Overall max time allowed for EACH test
-  timeout: 100 * 1000, // 60s (default is 30s)
-
-
-  testDir: './tests',
-  /* Run tests in files in parallel */
+  testDir: '.',   // root
+  testMatch: [
+    'api-authentications/**/*.spec.js',
+    'tests/**/*.spec.js'
+  ]
+  ,
   fullyParallel: true,
-  /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
-  /* Retry on CI only */
-  retries: 2 , 
-  /* Opt out of parallel tests on CI. */
+  retries: 2,
   workers: process.env.CI ? 1 : undefined,
-  /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  
-  reporter: [ // 'html',
 
-    // added allure reporter to generate allure results for each test run 
-    
-  ["line"],
-    ["allure-playwright", {
-      resultsDir: "allure-results", // Optional: specify where to save results
-    }],] ,
-
-
-  /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
-  use: {
-    /* Base URL to use in actions like `await page.goto('')`. */
-    baseURL: 'https://restful-booker.herokuapp.com/',
-
-    
-    // ✅ Headed mode: show the browser UI
-    headless: false,
-
-
-    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-        trace: 'on-first-retry',
-  },
-
-  
-
-  /* Configure projects for major browsers */
-  projects: [
-    /*
-    {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
-    },
-
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
-
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
-
-    /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: { ...devices['Pixel 5'] },
-    // },
-     {
-       name: 'Mobile Safari',
-       use: { ...devices['iPhone 12'] },
-     },
-     
-    /* Test against branded browsers. 
-    // {
-    //   name: 'Microsoft Edge',
-    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
-    // },
-    
-    {
-       name: 'Google Chrome',
-       use: { ...devices['Desktop Chrome'], channel: 'chrome' },
-    }, */
+  reporter: [
+    ['line'],
+    ['allure-playwright', { resultsDir: 'allure-results' }],
   ],
 
-  /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run start',
-  //   url: 'http://localhost:3000',
-  //   reuseExistingServer: !process.env.CI,
-  // },
-});
+  use: {
+    baseURL: 'https://restful-booker.herokuapp.com/',
+    headless: false,
+    trace: 'on-first-retry',
+  },
 
+  projects: [
+    { name: 'Mobile Safari', use: { ...devices['iPhone 12'] } },
+    // If you want Chrome desktop too, uncomment:
+    // { name: 'Google Chrome', use: { ...devices['Desktop Chrome'], channel: 'chrome' } },
+  ],
+});
