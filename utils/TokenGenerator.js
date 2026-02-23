@@ -3,7 +3,7 @@ import { readFile } from 'fs/promises';
 
 
 
-// ✅ Helper OUTSIDE the test
+// Helper OUTSIDE the test
  export async function generateToken(request) {
  
   const payloadText = await readFile('test-data/TokenGenerationRequestBody.json', 'utf8'); 
@@ -14,7 +14,7 @@ import { readFile } from 'fs/promises';
     headers: { 'Content-Type': 'application/json' }
   });
 
-  expect(res.ok()).toBeTruthy(); // ✅ good assertion
+  expect(res.ok()).toBeTruthy(); // assertion
 
   const body = await res.json();
 
